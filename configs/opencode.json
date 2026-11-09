@@ -34,13 +34,6 @@
             "output": 16384
           }
         },
-        "qwen2.5-coder-32b-quality": {
-          "name": "Qwen 2.5 Coder 32B Dense (Q8_0 - 48k Kontext, Klassischer Präzisions-Coder)",
-          "limit": {
-            "context": 49152,
-            "output": 8192
-          }
-        },
         "deepseek-r1-70b-speed": {
           "name": "DeepSeek R1 Distill 70B (IQ4_XS - 13.1 t/s, 32k Ctx Deep Reasoning <think>)",
           "limit": {
@@ -48,11 +41,11 @@
             "output": 16384
           }
         },
-        "next80b-32k": {
-          "name": "Qwen 3 Next 80B MoE (32k Ctx - Zukunfts-Alternative zu DeepSeek 70B)",
+        "llama3.3-70b-speed": {
+          "name": "Llama 3.3 70B Speed (IQ4_XS - 32k Ctx Allround & Agenten)",
           "limit": {
             "context": 32768,
-            "output": 16384
+            "output": 8192
           }
         },
         "llama3.3-70b-abliterated-speed": {
@@ -62,10 +55,24 @@
             "output": 8192
           }
         },
+        "qwen2.5-72b-speed": {
+          "name": "Qwen 2.5 72B Speed (IQ4_XS - 32k Ctx Starkes Allround-Modell)",
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
+        },
         "qwen3-obliterated": {
           "name": "Qwen 3 Obliterated 27B (Q4_K_M - 64k Ctx Security & Pentesting)",
           "limit": {
             "context": 65536,
+            "output": 8192
+          }
+        },
+        "qwen2.5vl:7b": {
+          "name": "Qwen 2.5 VL 7B (Q4_K_M - 32k Ctx Vision & Bildanalyse)",
+          "limit": {
+            "context": 32768,
             "output": 8192
           }
         }

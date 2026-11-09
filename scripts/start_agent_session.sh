@@ -60,7 +60,7 @@ if [ ! -L "${HOME}/.config/opencode/opencode.json" ] && [ ! -f "${HOME}/.config/
     "${BASE_DIR}/setup/03-link-agent-configs.sh"
 fi
 
-if [ ! -f "/tmp/.qwen3_tool_template_patched_v4" ]; then
+if [ ! -f "/tmp/.qwen3_tool_template_patched_v5" ]; then
     "${SCRIPT_DIR}/fix_ollama_tool_templates.sh" || true
 fi
 

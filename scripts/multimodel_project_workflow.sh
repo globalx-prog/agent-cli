@@ -162,8 +162,8 @@ case "$ACTION" in
     enable)
         enable_multimodel_agents "${2:-ollama/deepseek-r1-70b-speed}"
         ;;
-    enable-next80b)
-        enable_multimodel_agents "ollama/next80b-32k"
+    enable-qwen-distill)
+        enable_multimodel_agents "ollama/qwen3.8-35b-distill"
         ;;
     reset)
         reset_to_single_model
@@ -177,14 +177,14 @@ case "$ACTION" in
         echo "🏆 Multi-Model-Workflow für Großprojekte (W7800 48 GB)"
         echo "======================================================================"
         echo "  1) Multi-Model-Agenten aktivieren (DeepSeek-R1-70B Planer + 64k Speed + Q8 Coder + 70B Llama Reviewer)"
-        echo "  2) Multi-Model-Agenten mit Qwen3-Next-80B als Planer aktivieren"
+        echo "  2) Multi-Model-Agenten mit Qwen3.8-35B-Distill als Planer aktivieren (96k Ctx)"
         echo "  3) Geführter 4-Phasen-Staffellauf (72B Speculative -> 64k Speed -> Q8 Quality -> 70B Audit)"
         echo "  4) Zurücksetzen auf 1-Modell-pro-Modus (0s Wechselzeit)"
         echo "  5) Abbrechen"
         read -rp "Auswahl [1-5]: " mchoice
         case "$mchoice" in
             1) enable_multimodel_agents "ollama/deepseek-r1-70b-speed" && cd "${LLM_ROOT}" && opencode ;;
-            2) enable_multimodel_agents "ollama/next80b-32k" && cd "${LLM_ROOT}" && opencode ;;
+            2) enable_multimodel_agents "ollama/qwen3.8-35b-distill" && cd "${LLM_ROOT}" && opencode ;;
             3) run_guided_4phase_pipeline ;;
             4) reset_to_single_model ;;
             *) exit 0 ;;

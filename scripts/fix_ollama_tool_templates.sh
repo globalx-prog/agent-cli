@@ -38,10 +38,11 @@ You are provided with function signatures within <tools></tools> XML tags:
 {{- end }}
 </tools>
 
-For each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:
+CRITICAL: To invoke a function, you MUST return a valid JSON object within <tool_call></tool_call> XML tags:
 <tool_call>
-{"name": <function-name>, "arguments": <args-json-object>}
+{"name": "<function-name>", "arguments": <args-json-object>}
 </tool_call>
+Never output <tools> tags in your response. Never output raw JSON outside <tool_call></tool_call> tags.
 {{- end }}<|im_end|>
 {{ end }}
 {{- range $i, $_ := .Messages }}
@@ -110,7 +111,7 @@ PARAMETER num_batch 2048
 PARAMETER num_predict ${PREDICT_SIZE}
 PARAMETER temperature 0.2
 PARAMETER top_p 0.95
-PARAMETER repeat_penalty 1.05
+PARAMETER repeat_penalty 1.0
 EOF
         cat "${TMP_DIR}/qwen_json_tools.tpl" >> "${TMP_DIR}/Modelfile.${MODEL}"
         ollama create "${MODEL}" -f "${TMP_DIR}/Modelfile.${MODEL}"
@@ -121,7 +122,7 @@ EOF
 done
 
 rm -rf "${TMP_DIR}"
-touch "/tmp/.qwen3_tool_template_patched_v4"
+touch "/tmp/.qwen3_tool_template_patched_v5"
 echo "======================================================================"
 echo "✅ Fertig! Multi-Turn Tool-Calls bleiben jetzt in der Historie erhalten."
 echo "======================================================================"
