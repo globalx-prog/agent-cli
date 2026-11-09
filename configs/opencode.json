@@ -1,0 +1,189 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "ollama/qwen3-coder-quality",
+  "small_model": "ollama/qwen3-coder-quality",
+  "instructions": [
+    "/home/clemi/Projekte/LLM/agent-cli-setup/configs/MEMORY.md"
+  ],
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Local Ollama (ROCm 6.4 / W7800 Port 11434)",
+      "options": {
+        "baseURL": "http://127.0.0.1:11434/v1"
+      },
+      "models": {
+        "qwen3-coder-quality": {
+          "name": "Qwen 3 Coder Quality 30B MoE (Q8_0 - 62.7 t/s, 64k Max-Ctx, ~35.5 GB VRAM)",
+          "limit": {
+            "context": 65536,
+            "output": 16384
+          }
+        },
+        "qwen3-coder-speed": {
+          "name": "Qwen 3 Coder Speed 30B MoE (Q4_K_M - 80.6 t/s, 128k Ultra-Kontext, ~24.5 GB VRAM)",
+          "limit": {
+            "context": 131072,
+            "output": 16384
+          }
+        },
+        "qwen3.8-35b-distill": {
+          "name": "Qwen 3.8 Distill 35B (Q6_K - 66.6 t/s, 96k Langkontext & Architektur, ~33 GB VRAM)",
+          "limit": {
+            "context": 98304,
+            "output": 16384
+          }
+        },
+        "qwen2.5-coder-32b-quality": {
+          "name": "Qwen 2.5 Coder 32B Dense (Q8_0 - 48k Kontext, Klassischer Präzisions-Coder)",
+          "limit": {
+            "context": 49152,
+            "output": 8192
+          }
+        },
+        "deepseek-r1-70b-speed": {
+          "name": "DeepSeek R1 Distill 70B (IQ4_XS - 13.1 t/s, 32k Ctx Deep Reasoning <think>)",
+          "limit": {
+            "context": 32768,
+            "output": 16384
+          }
+        },
+        "next80b-32k": {
+          "name": "Qwen 3 Next 80B MoE (32k Ctx - Zukunfts-Alternative zu DeepSeek 70B)",
+          "limit": {
+            "context": 32768,
+            "output": 16384
+          }
+        },
+        "llama3.3-70b-abliterated-speed": {
+          "name": "Llama 3.3 70B Abliterated (IQ4_XS - 32k Ctx Unzensiertes Vier-Augen-Review)",
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
+        },
+        "qwen3-obliterated": {
+          "name": "Qwen 3 Obliterated 27B (Q4_K_M - 64k Ctx Security & Pentesting)",
+          "limit": {
+            "context": 65536,
+            "output": 8192
+          }
+        }
+      }
+    },
+    "llama-speedup": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Local llama-speedup (Speculative Decoding Port 5002)",
+      "options": {
+        "baseURL": "http://127.0.0.1:5002/v1"
+      },
+      "models": {
+        "qwen2.5-72b-speculative": {
+          "name": "Qwen 2.5 72B Speculative (33.6 t/s mit 0.5B Draft - 32k Max-VRAM Ctx)",
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
+        },
+        "llama3.3-70b-speculative": {
+          "name": "Llama 3.3 70B Speculative (25.6 t/s mit 1B Draft - 32k Max-VRAM Ctx)",
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
+        },
+        "llama3.3-70b-abliterated-speculative": {
+          "name": "Llama 3.3 70B Abliterated Speculative (30.0 t/s Unzensiert - 32k Max-VRAM Ctx)",
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
+        },
+        "deepseek-r1-70b-speculative": {
+          "name": "DeepSeek R1 70B N-Gram Speculative (14.0 t/s, 40k Max-VRAM Ctx, 0 MB Draft)",
+          "limit": {
+            "context": 40960,
+            "output": 16384
+          }
+        },
+        "qwen2.5-coder-32b-speculative": {
+          "name": "Qwen 2.5 Coder 32B Speculative (~60 t/s mit 1.5B Draft - 64k Kontext)",
+          "limit": {
+            "context": 65536,
+            "output": 8192
+          }
+        }
+      }
+    }
+  },
+  "permission": {
+    "edit": "ask",
+    "bash": "ask",
+    "webfetch": "deny"
+  },
+  "command": {
+    "suche": {
+      "description": "Anonyme lokale Websuche über SearXNG MCP (Port 8081)",
+      "template": "Nutze sofort das MCP-Tool searxng_search mit der Suchanfrage \"$ARGUMENTS\" und fasse die wichtigsten Ergebnisse übersichtlich mit Titel und URL zusammen."
+    },
+    "webtest": {
+      "description": "Lokale Webseite mit Playwright MCP öffnen und prüfen",
+      "template": "Nutze die Playwright MCP Tools, um die lokale Adresse $ARGUMENTS zu öffnen, prüfe den Seitentitel sowie die Struktur und fasse das Ergebnis kurz zusammen.",
+      "agent": "tester"
+    },
+    "plan": {
+      "description": "Architektur- & 3-Punkte-Plan erstellen (Read-Only im Planner-Agent)",
+      "template": "Analysiere die genannten Dateien/Ordner und erstelle direkt einen konkreten 3-Punkte-Implementierungsplan (ohne Dateien zu verändern): $ARGUMENTS",
+      "agent": "planner"
+    },
+    "review": {
+      "description": "Sicherheits- & Code-Review durchführen (Read-Only im Reviewer-Agent)",
+      "template": "Prüfe folgende Dateien oder Änderungen auf Bugs, Fehlerbehandlung und Sicherheit (ohne Dateien zu verändern): $ARGUMENTS",
+      "agent": "reviewer"
+    },
+    "merke": {
+      "description": "Speichert einen Fakt oder eine Entscheidung dauerhaft im lokalen Langzeit-Gedächtnis (MCP Memory)",
+      "template": "Nutze das MCP-Tool memory_save, um folgenden Fakt dauerhaft im lokalen Langzeit-Gedächtnis zu speichern (wähle einen kurzen passenden key und category): $ARGUMENTS"
+    },
+    "erinnere": {
+      "description": "Durchsucht oder lädt das lokale Langzeit-Gedächtnis (MCP Memory) in den aktuellen Kontext",
+      "template": "Nutze das MCP-Tool memory_search (oder memory_list, falls kein Suchbegriff angegeben wurde) für \"$ARGUMENTS\" und fasse alle relevanten gespeicherten Fakten zusammen."
+    }
+  },
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser",
+        "chromium",
+        "--executable-path",
+        "/home/clemi/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome",
+        "--headless",
+        "--no-sandbox"
+      ],
+      "enabled": true,
+      "timeout": 120000
+    },
+    "local-searxng": {
+      "type": "local",
+      "command": [
+        "python3",
+        "/home/clemi/Projekte/LLM/agent-cli-setup/scripts/mcp_searxng_bridge.py"
+      ],
+      "enabled": true,
+      "timeout": 30000
+    },
+    "local-memory": {
+      "type": "local",
+      "command": [
+        "python3",
+        "/home/clemi/Projekte/LLM/agent-cli-setup/scripts/mcp_memory_bridge.py"
+      ],
+      "enabled": true,
+      "timeout": 15000
+    }
+  }
+}

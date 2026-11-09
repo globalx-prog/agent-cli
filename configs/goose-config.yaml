@@ -1,0 +1,50 @@
+# Goose CLI Konfiguration für lokales LLM-Ökosystem (AMD Radeon Pro W7800)
+# Bindet nativ an Ollama (Port 11434) oder llama-speedup (Port 5002) ohne Cloud-Abhängigkeiten
+
+provider:
+  name: ollama
+  host: http://127.0.0.1:11434
+  model: qwen3-coder-quality
+  context_length: 32768
+  temperature: 0.2
+
+# Alternative High-Speed Speculative Decoding Option (llama-speedup / llama-swap):
+# (Vor Aktivierung Ollama entladen via: ./scripts/free_agent_vram.sh --only-ollama)
+# provider:
+#   name: openai_compatible
+#   host: http://127.0.0.1:5002/v1
+#   model: qwen2.5-72b-speculative
+
+environment:
+  OLLAMA_CONTEXT_LENGTH: "32768"
+  GOOSE_MODE: "subagent"
+  GOOSE_ENABLE_SUBAGENTS: "true"
+
+security:
+  allow_network_egress: false
+  allowed_hosts:
+    - "127.0.0.1"
+    - "localhost"
+    - "100.x.y.z"
+  require_confirmation:
+    bash: true
+    file_delete: true
+    file_overwrite: true
+
+mcp_servers:
+  playwright:
+    command: "npx"
+    args:
+      - "-y"
+      - "@playwright/mcp@latest"
+      - "--browser"
+      - "chromium"
+      - "--executable-path"
+      - "/home/clemi/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome"
+      - "--headless"
+      - "--no-sandbox"
+    env:
+      DISPLAY: ":0"
+  searxng:
+    command: "python3"
+    args: ["/home/clemi/Projekte/LLM/agent-cli-setup/scripts/mcp_searxng_bridge.py"]

@@ -1,0 +1,41 @@
+# Lokale Agent-Worktrees & Projekt-Sandboxes nicht ins Haupt-Repo committen
+projects/
+worktrees/
+.playwright-mcp/
+output/
+outputs/
+**/output/
+**/outputs/
+temp/
+generated/
+
+# Generierte Bilder, Screenshots, Videos & Audio (NIEMALS committen)
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.mp4
+*.mkv
+*.webm
+*.mov
+*.avi
+*.wav
+*.mp3
+*.flac
+
+# Modelle & Gewichte
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.pth
+
+# Logs & temporäre Dateien
+*.log
+__pycache__/
+*.pyc
+.DS_Store
+.env
+**/.env
+

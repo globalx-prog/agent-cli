@@ -1,0 +1,42 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser",
+        "chromium",
+        "--executable-path",
+        "/home/clemi/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome",
+        "--headless",
+        "--no-sandbox"
+      ],
+      "env": {
+        "DISPLAY": ":0"
+      }
+    },
+    "local-searxng": {
+      "command": "python3",
+      "args": ["/home/clemi/Projekte/LLM/agent-cli-setup/scripts/mcp_searxng_bridge.py"]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/home/clemi/Projekte/LLM"
+      ]
+    },
+    "git": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-server-git",
+        "--repository",
+        "/home/clemi/Projekte/LLM"
+      ]
+    }
+  }
+}
+
