@@ -3,7 +3,7 @@
   "model": "ollama/qwen3-coder-quality",
   "small_model": "ollama/qwen3-coder-quality",
   "instructions": [
-    "/home/clemi/Projekte/LLM/agent-cli-setup/configs/MEMORY.md"
+    "/home/clemi/Projekte/LLM/agent-cli/configs/MEMORY.md"
   ],
   "provider": {
     "ollama": {
@@ -178,7 +178,7 @@
       "type": "local",
       "command": [
         "python3",
-        "/home/clemi/Projekte/LLM/agent-cli-setup/scripts/mcp_searxng_bridge.py"
+        "/home/clemi/Projekte/LLM/agent-cli/scripts/mcp_searxng_bridge.py"
       ],
       "enabled": true,
       "timeout": 30000
@@ -187,7 +187,7 @@
       "type": "local",
       "command": [
         "python3",
-        "/home/clemi/Projekte/LLM/agent-cli-setup/scripts/mcp_memory_bridge.py"
+        "/home/clemi/Projekte/LLM/agent-cli/scripts/mcp_memory_bridge.py"
       ],
       "enabled": true,
       "timeout": 15000

@@ -18,7 +18,7 @@
     },
     "local-searxng": {
       "command": "python3",
-      "args": ["/home/clemi/Projekte/LLM/agent-cli-setup/scripts/mcp_searxng_bridge.py"]
+      "args": ["/home/clemi/Projekte/LLM/agent-cli/scripts/mcp_searxng_bridge.py"]
     },
     "filesystem": {
       "command": "npx",
